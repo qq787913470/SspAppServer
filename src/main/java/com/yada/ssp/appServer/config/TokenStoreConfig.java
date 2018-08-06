@@ -1,4 +1,4 @@
-package com.yada.myinfo.service.config;
+package com.yada.ssp.appServer.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

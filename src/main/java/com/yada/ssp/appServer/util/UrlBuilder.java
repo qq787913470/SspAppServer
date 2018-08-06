@@ -1,4 +1,4 @@
-package com.yada.myinfo.service.util;
+package com.yada.ssp.appServer.util;
 
 import java.util.Map;
 

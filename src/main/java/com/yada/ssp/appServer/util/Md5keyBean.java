@@ -1,4 +1,4 @@
-package com.yada.myinfo.service.util;
+package com.yada.ssp.appServer.util;
 
 /*******************************************************************************
  * keyBean ��ʵ����RSA Data Security, Inc.���ύ��IETF ��RFC1321�е�keyBean

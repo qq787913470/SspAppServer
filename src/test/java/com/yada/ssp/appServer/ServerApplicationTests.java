@@ -1,6 +1,6 @@
-package com.yada.myinfo.service;
+package com.yada.ssp.appServer;
 
-import com.yada.myinfo.service.config.PwdEncoderConfig;
+import com.yada.ssp.appServer.config.PwdEncoderConfig;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

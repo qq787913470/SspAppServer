@@ -1,4 +1,4 @@
-package com.yada.myinfo.service.web;
+package com.yada.ssp.appServer.web;
 
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;

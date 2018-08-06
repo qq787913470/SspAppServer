@@ -1,6 +1,6 @@
-package com.yada.myinfo.service.config;
+package com.yada.ssp.appServer.config;
 
-import com.yada.myinfo.service.service.UserDetailsService;
+import com.yada.ssp.appServer.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,4 +1,4 @@
-package com.yada.myinfo.service;
+package com.yada.ssp.appServer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package com.yada.myinfo.service.config;
+package com.yada.ssp.appServer.config;
 
-import com.yada.myinfo.service.util.Md5keyBean;
+import com.yada.ssp.appServer.util.Md5keyBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,4 +1,4 @@
-package com.yada.myinfo.service.util;
+package com.yada.ssp.appServer.util;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

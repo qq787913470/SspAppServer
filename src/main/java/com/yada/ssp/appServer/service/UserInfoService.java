@@ -1,9 +1,9 @@
-package com.yada.myinfo.service.service;
+package com.yada.ssp.appServer.service;
 
-import com.yada.myinfo.service.dao.MerchantDao;
-import com.yada.myinfo.service.dao.UserInfoDao;
-import com.yada.myinfo.service.model.Merchant;
-import com.yada.myinfo.service.model.UserInfo;
+import com.yada.ssp.appServer.dao.MerchantDao;
+import com.yada.ssp.appServer.dao.UserInfoDao;
+import com.yada.ssp.appServer.model.Merchant;
+import com.yada.ssp.appServer.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

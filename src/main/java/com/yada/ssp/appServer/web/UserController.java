@@ -1,6 +1,6 @@
-package com.yada.myinfo.service.web;
+package com.yada.ssp.appServer.web;
 
-import com.yada.myinfo.service.service.UserInfoService;
+import com.yada.ssp.appServer.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;

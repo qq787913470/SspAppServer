@@ -1,4 +1,4 @@
-package com.yada.myinfo.service.model;
+package com.yada.ssp.appServer.model;
 
 import javax.persistence.*;
 import java.util.Set;
