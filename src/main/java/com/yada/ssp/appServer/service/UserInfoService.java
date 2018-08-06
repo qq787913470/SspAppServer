@@ -39,17 +39,18 @@ public class UserInfoService {
     /**
      * 更新用户密码
      *
-     * @param id     用户ID
-     * @param oldPwd 旧密码
-     * @param newPwd 新密码
+     * @param clientId 由merNo@loginName组成
+     * @param oldPwd   旧密码
+     * @param newPwd   新密码
      * @return 更新是否成功
      */
-    public boolean putPwd(String id, String oldPwd, String newPwd) {
-        UserInfo user = userInfoDao.getOne(id);
+    public boolean putPwd(String clientId, String oldPwd, String newPwd) {
+        String[] client = clientId.split("@");
+        UserInfo userInfo = userInfoDao.findByMerNoAndLoginName(client[0], client[1]);
 
-        if (user.getPassWord() != null && user.getPassWord().equals(md5PasswordEncoder.encode(oldPwd))) {
-            user.setPassWord(md5PasswordEncoder.encode(newPwd));
-            userInfoDao.saveAndFlush(user);
+        if (userInfo.getPassWord() != null && userInfo.getPassWord().equals(md5PasswordEncoder.encode(oldPwd))) {
+            userInfo.setPassWord(md5PasswordEncoder.encode(newPwd));
+            userInfoDao.saveAndFlush(userInfo);
             return true;
         } else {
             return false;

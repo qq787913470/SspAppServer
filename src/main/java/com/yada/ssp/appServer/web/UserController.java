@@ -24,14 +24,15 @@ public class UserController {
 
     /**
      * 修改商户密码
-     * @param token 授权信息
+     *
+     * @param token  授权信息
      * @param oldPwd 旧密码
      * @param newPwd 新密码
      * @return 修改是否成功
      */
     @PutMapping(value = "/updatePwd")
     public boolean updatePwd(OAuth2Authentication token, @RequestBody String oldPwd, @RequestBody String newPwd) {
-        String loginName = token.getOAuth2Request().getClientId();
-        return userInfoService.putPwd(loginName, oldPwd, newPwd);
+        String clientId = token.getOAuth2Request().getClientId();
+        return userInfoService.putPwd(clientId, oldPwd, newPwd);
     }
 }
