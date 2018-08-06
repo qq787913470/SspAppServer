@@ -1,14 +1,20 @@
 package com.yada.myinfo.service.web;
 
+import com.yada.myinfo.service.service.UserInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
+
+    private final UserInfoService userInfoService;
+
+    @Autowired
+    public UserController(UserInfoService userInfoService) {
+        this.userInfoService = userInfoService;
+    }
 
     // TODO 获取商户信息
     @GetMapping(value = "/")
@@ -16,9 +22,16 @@ public class UserController {
         return token.getOAuth2Request().getClientId();
     }
 
-    // TODO 修改商户密码
-    @PutMapping(value = "/")
-    public String putPwd(String oldPwd, String newPwd) {
-        return "";
+    /**
+     * 修改商户密码
+     * @param token 授权信息
+     * @param oldPwd 旧密码
+     * @param newPwd 新密码
+     * @return 修改是否成功
+     */
+    @PutMapping(value = "/updatePwd")
+    public boolean updatePwd(OAuth2Authentication token, @RequestBody String oldPwd, @RequestBody String newPwd) {
+        String loginName = token.getOAuth2Request().getClientId();
+        return userInfoService.putPwd(loginName, oldPwd, newPwd);
     }
 }

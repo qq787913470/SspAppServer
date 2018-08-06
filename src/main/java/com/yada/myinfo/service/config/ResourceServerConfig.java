@@ -21,7 +21,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/h2/**").permitAll()
+        // TODO 通过配置文件配置权限
+        http.headers().frameOptions().disable()
+                .and().authorizeRequests().antMatchers("/h2/**").permitAll()
                 .and().authorizeRequests()
                 .antMatchers("/tran/**").hasAnyRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER")
