@@ -17,7 +17,7 @@ public class Merchant {
     private String merType;
 
     @ManyToOne
-    @JoinColumn(name = "P_MER_NO", referencedColumnName = "MER_NO")
+    @JoinColumn(name = "P_MER_NO")
     private Merchant merchant;
 
     @OneToMany(mappedBy = "merchant")

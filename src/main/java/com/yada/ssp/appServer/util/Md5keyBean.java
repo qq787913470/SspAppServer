@@ -371,7 +371,6 @@ public class Md5keyBean {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
