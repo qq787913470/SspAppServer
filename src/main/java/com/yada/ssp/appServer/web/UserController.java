@@ -1,5 +1,6 @@
 package com.yada.ssp.appServer.web;
 
+import com.yada.ssp.appServer.model.UserInfo;
 import com.yada.ssp.appServer.model.UserInfoPK;
 import com.yada.ssp.appServer.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,16 @@ public class UserController {
         this.userInfoService = userInfoService;
     }
 
-    // TODO 获取商户信息
+    /**
+     * 获取商户信息
+     *
+     * @param token 授权信息
+     * @return 商户信息
+     */
     @GetMapping(value = "/")
-    public String index(OAuth2Authentication token) {
-        return token.getOAuth2Request().getClientId();
+    public UserInfo index(OAuth2Authentication token) {
+        String[] id = token.getOAuth2Request().getClientId().split("@");
+        return userInfoService.getUserInfo(new UserInfoPK(id[0], id[1]));
     }
 
     /**
