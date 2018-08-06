@@ -2,6 +2,7 @@ package com.yada.ssp.appServer.service;
 
 import com.yada.ssp.appServer.dao.UserInfoDao;
 import com.yada.ssp.appServer.model.UserInfo;
+import com.yada.ssp.appServer.model.UserInfoPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,9 +32,10 @@ public class UserDetailsService implements ClientDetailsService {
 
     @Override
     public ClientDetails loadClientByClientId(String clientId) {
-        UserInfo user = userInfoDao.findByMerNoAndLoginName(clientId, "");
+        String[] id = clientId.split("@");
+        UserInfo user = userInfoDao.getOne(new UserInfoPK(id[0], id[1]));
 
-        if (user != null) {
+        if (user.getRoles() != null) {
             String[] roles = user.getRoles().split(",");
             List<GrantedAuthority> authorities = new ArrayList<>();
             for (String role : roles) {

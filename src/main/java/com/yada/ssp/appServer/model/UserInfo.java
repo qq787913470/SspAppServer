@@ -1,21 +1,17 @@
 package com.yada.ssp.appServer.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "T_B_APP_USER")
+@IdClass(UserInfoPK.class)
 public class UserInfo {
 
-    @Id
-    private String id;
     //商户号
-    @Column
+    @Id
     private String merNo;
     //登录名
-    @Column
+    @Id
     private String loginName;
     //用户名
     @Column
@@ -26,14 +22,6 @@ public class UserInfo {
     //角色ID
     @Column
     private String roles;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getMerNo() {
         return merNo;

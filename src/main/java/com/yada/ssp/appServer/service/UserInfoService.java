@@ -4,6 +4,7 @@ import com.yada.ssp.appServer.dao.MerchantDao;
 import com.yada.ssp.appServer.dao.UserInfoDao;
 import com.yada.ssp.appServer.model.Merchant;
 import com.yada.ssp.appServer.model.UserInfo;
+import com.yada.ssp.appServer.model.UserInfoPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,25 +29,23 @@ public class UserInfoService {
     /**
      * 获取用户信息
      *
-     * @param merNo     商户号
-     * @param loginName 登录名称
+     * @param id 由merNo/loginName组成
      * @return 用户信息
      */
-    public UserInfo getUserInfo(String merNo, String loginName) {
-        return userInfoDao.findByMerNoAndLoginName(merNo, loginName);
+    public UserInfo getUserInfo(UserInfoPK id) {
+        return userInfoDao.getOne(id);
     }
 
     /**
      * 更新用户密码
      *
-     * @param clientId 由merNo@loginName组成
-     * @param oldPwd   旧密码
-     * @param newPwd   新密码
+     * @param id     由merNo/loginName组成
+     * @param oldPwd 旧密码
+     * @param newPwd 新密码
      * @return 更新是否成功
      */
-    public boolean putPwd(String clientId, String oldPwd, String newPwd) {
-        String[] client = clientId.split("@");
-        UserInfo userInfo = userInfoDao.findByMerNoAndLoginName(client[0], client[1]);
+    public boolean putPwd(UserInfoPK id, String oldPwd, String newPwd) {
+        UserInfo userInfo = userInfoDao.getOne(id);
 
         if (userInfo.getPassWord() != null && userInfo.getPassWord().equals(md5PasswordEncoder.encode(oldPwd))) {
             userInfo.setPassWord(md5PasswordEncoder.encode(newPwd));
