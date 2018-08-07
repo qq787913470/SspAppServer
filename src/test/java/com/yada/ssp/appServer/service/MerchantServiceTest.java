@@ -26,19 +26,25 @@ public class MerchantServiceTest {
 
     @Test
     public void getSubMer() {
-        Mockito.when(merchantDao.getOne(Mockito.anyString())).then((Answer<Merchant>) invocation -> {
+        Mockito.when(merchantDao.findById(Mockito.anyString())).then((Answer<Optional<Merchant>>) invocation -> {
             String merNo = invocation.getArgument(0).toString();
             Merchant mer = new Merchant();
             switch (merNo) {
                 case "0":
+                    break;
+                case "1":
+                    mer.setMerNo(merNo);
                     mer.setChildren(null);
                     break;
             }
-            return mer;
+            return Optional.of(mer);
         });
 
-        Map<String, String> subMer = merchantService.getSubMer("0");
-        Assert.assertEquals(0, subMer.size());
+        Map<String, String> subMer1 = merchantService.getSubMer("0");
+        Assert.assertEquals(0, subMer1.size());
+
+        Map<String, String> subMer2 = merchantService.getSubMer("1");
+        Assert.assertEquals(1, subMer2.size());
     }
 
     @Test

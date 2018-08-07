@@ -28,10 +28,14 @@ public class MerchantService {
     public Map<String, String> getSubMer(String merNo) {
         Map<String, String> subMer = new HashMap<>();
         Merchant merchant = merchantDao.findById(merNo).orElse(new Merchant());
-        if ("1".equals(merchant.getMerType()) && merchant.getChildren() != null)
+        if (merchant.getMerNo() != null) {
+            subMer.put(merchant.getMerNo(), merchant.getMerName());
+        }
+        if ("1".equals(merchant.getMerType()) && merchant.getChildren() != null) {
             for (Merchant mer : merchant.getChildren()) {
                 subMer.put(mer.getMerNo(), mer.getMerName());
             }
+        }
         return subMer;
     }
 
