@@ -8,7 +8,5 @@ import java.util.List;
 
 public interface TranInfoDao extends JpaRepository<TranInfo, String>, JpaSpecificationExecutor<TranInfo> {
 
-    List<TranInfo> findByMerNo(String merNo);
-
     List<TranInfo> findByMerNoAndTranDate(String merNo, String tranDate);
 }

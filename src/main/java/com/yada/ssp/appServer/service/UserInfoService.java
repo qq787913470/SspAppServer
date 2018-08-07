@@ -44,7 +44,7 @@ public class UserInfoService {
      * @param newPwd 新密码
      * @return 更新是否成功
      */
-    public boolean putPwd(UserInfoPK id, String oldPwd, String newPwd) {
+    public boolean updatePwd(UserInfoPK id, String oldPwd, String newPwd) {
         UserInfo userInfo = userInfoDao.getOne(id);
 
         if (userInfo.getPassWord() != null && userInfo.getPassWord().equals(md5PasswordEncoder.encode(oldPwd))) {
@@ -65,9 +65,10 @@ public class UserInfoService {
     public Map<String, String> getSubMer(String merNo) {
         Merchant merchant = merchantDao.getOne(merNo);
         Map<String, String> subMer = new HashMap<>();
-        for (Merchant mer : merchant.getChildren()) {
-            subMer.put(mer.getMerNo(), mer.getMerName());
-        }
+        if ("1".equals(merchant.getMerType()) && merchant.getChildren() != null)
+            for (Merchant mer : merchant.getChildren()) {
+                subMer.put(mer.getMerNo(), mer.getMerName());
+            }
         return subMer;
     }
 

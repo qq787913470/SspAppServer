@@ -41,6 +41,6 @@ public class UserController {
     @PutMapping(value = "/updatePwd")
     public boolean updatePwd(OAuth2Authentication token, @RequestBody String oldPwd, @RequestBody String newPwd) {
         String[] id = token.getOAuth2Request().getClientId().split("@");
-        return userInfoService.putPwd(new UserInfoPK(id[0], id[1]), oldPwd, newPwd);
+        return userInfoService.updatePwd(new UserInfoPK(id[0], id[1]), oldPwd, newPwd);
     }
 }

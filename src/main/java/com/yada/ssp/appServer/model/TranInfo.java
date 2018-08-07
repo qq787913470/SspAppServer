@@ -1,62 +1,70 @@
 package com.yada.ssp.appServer.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "T_B_TRANS")
 public class TranInfo {
 
     @Id
-    private String id;
-
+    private Long traceNo; // 流水号
     @Column
-    private String tranNo;
-
+    private Long batchNo; // 批次号
     @Column
-    private String tranAmt;
-
+    private Long invoiceNo; // 票据号
     @Column
-    private String tranDate;
-
+    private Float tranAmt; // 交易金额
     @Column
-    private String tranType;
-
+    private String tranType; // 交易类型
     @Column
-    private String merNo;
+    private String tranDate; // 交易时间
+    @Column
+    private String channel; // 交易渠道
+    @Column
+    private String cardNo; // 卡号
+    @Column
+    private String merNo; // 商户号
+    @Column
+    private String termNo; // 终端号
+    @Column
+    private String authNo; // 授权号
+    @Column
+    private String rrn; // 参考号
+    @Column
+    private String mcc; // mcc码
+    @Column
+    private String respCode; // 返回码
 
-    public String getId() {
-        return id;
+    public Long getTraceNo() {
+        return traceNo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTraceNo(Long traceNo) {
+        this.traceNo = traceNo;
     }
 
-    public String getTranNo() {
-        return tranNo;
+    public Long getBatchNo() {
+        return batchNo;
     }
 
-    public void setTranNo(String tranNo) {
-        this.tranNo = tranNo;
+    public void setBatchNo(Long batchNo) {
+        this.batchNo = batchNo;
     }
 
-    public String getTranAmt() {
+    public Long getInvoiceNo() {
+        return invoiceNo;
+    }
+
+    public void setInvoiceNo(Long invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
+
+    public Float getTranAmt() {
         return tranAmt;
     }
 
-    public void setTranAmt(String tranAmt) {
+    public void setTranAmt(Float tranAmt) {
         this.tranAmt = tranAmt;
-    }
-
-    public String getTranDate() {
-        return tranDate;
-    }
-
-    public void setTranDate(String tranDate) {
-        this.tranDate = tranDate;
     }
 
     public String getTranType() {
@@ -67,11 +75,75 @@ public class TranInfo {
         this.tranType = tranType;
     }
 
+    public String getTranDate() {
+        return tranDate;
+    }
+
+    public void setTranDate(String tranDate) {
+        this.tranDate = tranDate;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
+
+    public String getCardNo() {
+        return cardNo;
+    }
+
+    public void setCardNo(String cardNo) {
+        this.cardNo = cardNo;
+    }
+
     public String getMerNo() {
         return merNo;
     }
 
     public void setMerNo(String merNo) {
         this.merNo = merNo;
+    }
+
+    public String getTermNo() {
+        return termNo;
+    }
+
+    public void setTermNo(String termNo) {
+        this.termNo = termNo;
+    }
+
+    public String getAuthNo() {
+        return authNo;
+    }
+
+    public void setAuthNo(String authNo) {
+        this.authNo = authNo;
+    }
+
+    public String getRrn() {
+        return rrn;
+    }
+
+    public void setRrn(String rrn) {
+        this.rrn = rrn;
+    }
+
+    public String getMcc() {
+        return mcc;
+    }
+
+    public void setMcc(String mcc) {
+        this.mcc = mcc;
+    }
+
+    public String getRespCode() {
+        return respCode;
+    }
+
+    public void setRespCode(String respCode) {
+        this.respCode = respCode;
     }
 }

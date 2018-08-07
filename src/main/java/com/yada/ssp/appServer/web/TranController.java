@@ -20,7 +20,7 @@ public class TranController {
     }
 
     @GetMapping(value = "/list")
-    public List<TranInfo> list(OAuth2Authentication token, @RequestBody String tranDate) {
+    public List<TranInfo> list(OAuth2Authentication token, @RequestParam String tranDate) {
         String merNo = token.getOAuth2Request().getClientId().split("@")[0];
         // TODO 通过某个表获取该用户下能查询的所有商户
         // TODO 如何查询集团商户数据
