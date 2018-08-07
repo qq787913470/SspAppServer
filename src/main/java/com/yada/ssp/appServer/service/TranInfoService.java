@@ -17,8 +17,8 @@ public class TranInfoService {
         this.tranInfoDao = tranInfoDao;
     }
 
-    public TranInfo getInfo(String id){
-        return tranInfoDao.getOne(id);
+    public TranInfo getInfo(String id) {
+        return tranInfoDao.findById(id).orElse(null);
     }
 
     public List<TranInfo> getList(String merNo, String tranDate) {

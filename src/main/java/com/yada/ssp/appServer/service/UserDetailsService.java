@@ -33,7 +33,7 @@ public class UserDetailsService implements ClientDetailsService {
     @Override
     public ClientDetails loadClientByClientId(String clientId) {
         String[] id = clientId.split("@");
-        UserInfo user = userInfoDao.getOne(new UserInfoPK(id[0], id[1]));
+        UserInfo user = userInfoDao.findById(new UserInfoPK(id[0], id[1])).orElse(new UserInfo());
 
         if (user.getRoles() != null) {
             String[] roles = user.getRoles().split(",");

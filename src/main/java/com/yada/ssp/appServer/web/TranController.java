@@ -1,6 +1,7 @@
 package com.yada.ssp.appServer.web;
 
 import com.yada.ssp.appServer.model.TranInfo;
+import com.yada.ssp.appServer.service.MerchantService;
 import com.yada.ssp.appServer.service.TranInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -13,24 +14,30 @@ import java.util.List;
 public class TranController {
 
     private final TranInfoService tranInfoService;
+    private final MerchantService merchantService;
 
     @Autowired
-    public TranController(TranInfoService tranInfoService) {
+    public TranController(TranInfoService tranInfoService, MerchantService merchantService) {
         this.tranInfoService = tranInfoService;
+        this.merchantService = merchantService;
     }
 
-    @GetMapping(value = "/list")
-    public List<TranInfo> list(OAuth2Authentication token, @RequestParam String tranDate) {
-        String merNo = token.getOAuth2Request().getClientId().split("@")[0];
-        // TODO 通过某个表获取该用户下能查询的所有商户
+    @GetMapping(value = "/{merNo}")
+    public List<TranInfo> list(OAuth2Authentication token, @PathVariable("merNo") String merNo, @RequestParam String tranDate) {
         // TODO 如何查询集团商户数据
-        return tranInfoService.getList(merNo, tranDate);
+        String pMerNo = token.getOAuth2Request().getClientId().split("@")[0];
+        if (merchantService.checkSubMer(pMerNo, merNo)) {
+            return tranInfoService.getList(merNo, tranDate);
+        }
+        return null;
     }
 
-    @GetMapping(value = "/info/{id}")
-    public TranInfo info(OAuth2Authentication token, @PathVariable("id") String id) {
-        String clientId = token.getOAuth2Request().getClientId();
-        // TODO 判断merNo是否一致
-        return tranInfoService.getInfo(id);
+    @GetMapping(value = "/{merNo}/{id}")
+    public TranInfo info(OAuth2Authentication token, @PathVariable("merNo") String merNo, @PathVariable("id") String id) {
+        String pMerNo = token.getOAuth2Request().getClientId().split("@")[0];
+        if (merchantService.checkSubMer(pMerNo, merNo)) {
+            return tranInfoService.getInfo(id);
+        }
+        return null;
     }
 }
