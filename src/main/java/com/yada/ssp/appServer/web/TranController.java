@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/tran")
@@ -20,6 +21,15 @@ public class TranController {
     public TranController(TranInfoService tranInfoService, MerchantService merchantService) {
         this.tranInfoService = tranInfoService;
         this.merchantService = merchantService;
+    }
+
+    /**
+     * 获取商户信息
+     */
+    @GetMapping(value = "/subMer")
+    public Map<String, String> subMerList(OAuth2Authentication token) {
+        String merNo = token.getOAuth2Request().getClientId().split("@")[0];
+        return merchantService.getSubMer(merNo);
     }
 
     @GetMapping(value = "/{merNo}")
