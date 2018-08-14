@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 public class UserInfoPK implements Serializable {
 
+    public UserInfoPK() {
+    }
+
     public UserInfoPK(String merNo, String loginName) {
         this.merNo = merNo;
         this.loginName = loginName;

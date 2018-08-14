@@ -1,5 +1,7 @@
 package com.yada.ssp.appServer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +19,7 @@ public class UserInfo {
     @Column
     private String userName;
     //用户密码
+    @JsonIgnore
     @Column
     private String passWord;
     //角色ID

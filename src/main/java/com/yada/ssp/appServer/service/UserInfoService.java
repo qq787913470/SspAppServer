@@ -6,6 +6,7 @@ import com.yada.ssp.appServer.model.UserInfoPK;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class UserInfoService {
@@ -37,7 +38,7 @@ public class UserInfoService {
      * @param newPwd 新密码
      * @return 更新是否成功
      */
-    public boolean updatePwd(UserInfoPK id, String oldPwd, String newPwd) {
+    public boolean updatePwd(UserInfoPK id, @RequestBody String oldPwd, String newPwd) {
 
         UserInfo userInfo = userInfoDao.findById(id).orElse(new UserInfo());
 
