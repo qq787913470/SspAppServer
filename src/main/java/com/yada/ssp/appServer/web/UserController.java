@@ -35,13 +35,26 @@ public class UserController {
     /**
      * 修改商户密码
      *
-     * @param token  授权信息
-     * @param pwd 旧密码、新密码
+     * @param token 授权信息
+     * @param pwd   旧密码、新密码
      * @return 修改是否成功
      */
     @PutMapping(value = "/updatePwd")
     public boolean updatePwd(OAuth2Authentication token, @RequestBody @Validated UpdatePwd pwd) {
         String[] id = token.getOAuth2Request().getClientId().split("@");
         return userInfoService.updatePwd(new UserInfoPK(id[0], id[1]), pwd.getOldPwd(), pwd.getNewPwd());
+    }
+
+    /**
+     * 获取用户二维码
+     *
+     * @param token 授权信息
+     * @return 二维码的内容
+     */
+    @GetMapping(value = "/qrCode")
+    public String getQrCode(OAuth2Authentication token) {
+        String[] id = token.getOAuth2Request().getClientId().split("@");
+        // TODO 生成二维码
+        return id[0];
     }
 }
