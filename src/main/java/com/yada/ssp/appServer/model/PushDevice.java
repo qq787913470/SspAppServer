@@ -11,8 +11,8 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "T_B_PUSH_DEVICE_TYPE")
-public class PushDeviceType {
+@Table(name = "T_B_PUSH_DEVICE")
+public class PushDevice {
     //设备ID
     @Id
     private String deviceId;

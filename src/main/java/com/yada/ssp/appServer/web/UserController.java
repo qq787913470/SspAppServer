@@ -2,6 +2,7 @@ package com.yada.ssp.appServer.web;
 
 import com.yada.ssp.appServer.model.UserInfo;
 import com.yada.ssp.appServer.model.UserInfoPK;
+import com.yada.ssp.appServer.service.PushDeviceService;
 import com.yada.ssp.appServer.service.UserInfoService;
 import com.yada.ssp.appServer.view.UpdatePwd;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserInfoService userInfoService;
+    private final PushDeviceService pushDeviceService;
 
     @Autowired
-    public UserController(UserInfoService userInfoService) {
+    public UserController(UserInfoService userInfoService, PushDeviceService pushDeviceService) {
         this.userInfoService = userInfoService;
+        this.pushDeviceService = pushDeviceService;
     }
 
     /**
@@ -56,5 +59,27 @@ public class UserController {
         String[] id = token.getOAuth2Request().getClientId().split("@");
         // TODO 生成二维码
         return id[0];
+    }
+
+    /**
+     * 推送绑定
+     * @param token 授权信息
+     * @param type 设备类型
+     * @param deviceId 设备ID
+     * @param platform 设备平台
+     */
+    @PostMapping(value = "/bindPush")
+    public void bindPush(OAuth2Authentication token, String type, String deviceId, String platform) {
+        String merNo = token.getOAuth2Request().getClientId().split("@")[0];
+        pushDeviceService.saveAndUpdate(merNo, type, deviceId, platform);
+    }
+
+    /**
+     *推送解绑
+     * @param deviceId 设备ID
+     */
+    @DeleteMapping(value = "/unBindPush")
+    public void unBindPush(String deviceId) {
+        pushDeviceService.delete(deviceId);
     }
 }
