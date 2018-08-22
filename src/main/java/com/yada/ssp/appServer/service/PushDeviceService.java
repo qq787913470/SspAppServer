@@ -21,13 +21,13 @@ public class PushDeviceService {
         this.pushDeviceDao = pushDeviceDao;
     }
 
-    public void saveAndUpdate(String merNo, String type, String deviceId, String platform) {
+    public PushDevice saveAndUpdate(String merNo, String type, String deviceId, String platform) {
         PushDevice pushDevice = new PushDevice();
         pushDevice.setDeviceId(deviceId);
         pushDevice.setMerNo(merNo);
         pushDevice.setType(type);
         pushDevice.setPlatform(platform);
-        pushDeviceDao.saveAndFlush(pushDevice);
+        return pushDeviceDao.saveAndFlush(pushDevice);
     }
 
     public void delete(String deviceId) {

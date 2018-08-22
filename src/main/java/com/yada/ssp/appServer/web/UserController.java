@@ -1,5 +1,6 @@
 package com.yada.ssp.appServer.web;
 
+import com.yada.ssp.appServer.model.PushDevice;
 import com.yada.ssp.appServer.model.UserInfo;
 import com.yada.ssp.appServer.model.UserInfoPK;
 import com.yada.ssp.appServer.service.PushDeviceService;
@@ -63,23 +64,26 @@ public class UserController {
 
     /**
      * 推送绑定
-     * @param token 授权信息
-     * @param type 设备类型
+     *
+     * @param token    授权信息
+     * @param type     设备类型
      * @param deviceId 设备ID
      * @param platform 设备平台
      */
     @PostMapping(value = "/bindPush")
-    public void bindPush(OAuth2Authentication token, String type, String deviceId, String platform) {
+    public PushDevice bindPush(OAuth2Authentication token, String type, String deviceId, String platform) {
         String merNo = token.getOAuth2Request().getClientId().split("@")[0];
-        pushDeviceService.saveAndUpdate(merNo, type, deviceId, platform);
+        return pushDeviceService.saveAndUpdate(merNo, type, deviceId, platform);
     }
 
     /**
-     *推送解绑
+     * 推送解绑
+     *
      * @param deviceId 设备ID
      */
-    @DeleteMapping(value = "/unBindPush")
-    public void unBindPush(String deviceId) {
+    @DeleteMapping(value = "/unBindPush/{deviceId}")
+    public boolean unBindPush(@PathVariable("deviceId")String deviceId) {
         pushDeviceService.delete(deviceId);
+        return true;
     }
 }
