@@ -17,7 +17,7 @@ public class TranInfoService {
         this.tranInfoDao = tranInfoDao;
     }
 
-    public TranInfo getInfo(String id) {
+    public TranInfo getInfo(Long id) {
         return tranInfoDao.findById(id).orElse(null);
     }
 
