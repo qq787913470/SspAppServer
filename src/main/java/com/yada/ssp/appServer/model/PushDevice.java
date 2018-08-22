@@ -15,23 +15,23 @@ import javax.persistence.Table;
 public class PushDevice {
     //设备ID
     @Id
-    private String deviceId;
+    private String id;
     //商户号
     @Column
     private String merNo;
-    //推送方式
+    //推送服务标识
     @Column
     private String type;
-    //推送平台
+    //设备平台
     @Column
     private String platform;
 
-    public String getDeviceId() {
-        return deviceId;
+    public String getId() {
+        return id;
     }
 
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getMerNo() {
