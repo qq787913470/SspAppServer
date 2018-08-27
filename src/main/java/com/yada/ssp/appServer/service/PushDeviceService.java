@@ -21,17 +21,17 @@ public class PushDeviceService {
         this.pushDeviceDao = pushDeviceDao;
     }
 
-    public PushDevice saveAndUpdate(String merNo, String type, String deviceId, String platform) {
+    public PushDevice saveAndUpdate(String merNo, String type, String id, String platform) {
         PushDevice pushDevice = new PushDevice();
-        pushDevice.setDeviceId(deviceId);
+        pushDevice.setId(id);
         pushDevice.setMerNo(merNo);
         pushDevice.setType(type);
         pushDevice.setPlatform(platform);
         return pushDeviceDao.saveAndFlush(pushDevice);
     }
 
-    public void delete(String deviceId) {
-        pushDeviceDao.deleteById(deviceId);
+    public void delete(String id) {
+        pushDeviceDao.deleteById(id);
     }
 
     public List<PushDevice> findListByMerNo(String merNo) {
