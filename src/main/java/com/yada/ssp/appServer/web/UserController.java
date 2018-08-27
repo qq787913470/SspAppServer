@@ -2,7 +2,7 @@ package com.yada.ssp.appServer.web;
 
 import com.yada.ssp.appServer.model.UserInfo;
 import com.yada.ssp.appServer.model.UserInfoPK;
-import com.yada.ssp.appServer.service.PushDeviceService;
+import com.yada.ssp.appServer.service.DeviceService;
 import com.yada.ssp.appServer.service.UserInfoService;
 import com.yada.ssp.appServer.view.UpdatePwd;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserInfoService userInfoService;
-    private final PushDeviceService pushDeviceService;
+    private final DeviceService deviceService;
 
     @Autowired
-    public UserController(UserInfoService userInfoService, PushDeviceService pushDeviceService) {
+    public UserController(UserInfoService userInfoService, DeviceService deviceService) {
         this.userInfoService = userInfoService;
-        this.pushDeviceService = pushDeviceService;
+        this.deviceService = deviceService;
     }
 
     /**
@@ -65,24 +65,26 @@ public class UserController {
      * 推送绑定
      *
      * @param token    授权信息
-     * @param type     设备类型
-     * @param id       设备ID
+     * @param pushType 设备类型
+     * @param deviceNo 设备ID
      * @param platform 设备平台
      */
     @PostMapping(value = "/bindPush")
-    public boolean bindPush(OAuth2Authentication token, String type, String id, String platform) {
+    public boolean bindPush(OAuth2Authentication token, String pushType, String deviceNo, String platform) {
         String merNo = token.getOAuth2Request().getClientId().split("@")[0];
-        return pushDeviceService.saveAndUpdate(merNo, type, id, platform) != null;
+        String loginName = token.getOAuth2Request().getClientId().split("@")[1];
+        return deviceService.saveAndUpdate(merNo, loginName, pushType, deviceNo, platform) != null;
     }
 
     /**
      * 推送解绑
      *
-     * @param id 设备ID
+     * @param merNo 商户号
+     * @param loginName 登录名
      */
-    @DeleteMapping(value = "/unBindPush/{id}")
-    public boolean unBindPush(@PathVariable("id") String id) {
-        pushDeviceService.delete(id);
+    @DeleteMapping(value = "/unBindPush/{merNo}/{loginName}")
+    public boolean unBindPush(@PathVariable("merNo") String merNo, @PathVariable("loginName") String loginName) {
+        deviceService.delete(new UserInfoPK(merNo, loginName));
         return true;
     }
 }
