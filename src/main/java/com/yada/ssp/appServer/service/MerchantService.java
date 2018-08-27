@@ -3,6 +3,7 @@ package com.yada.ssp.appServer.service;
 import com.yada.ssp.appServer.dao.MerchantDao;
 import com.yada.ssp.appServer.model.Merchant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class MerchantService {
      * @param merNo 集团商户号
      * @return 下级商户
      */
+    @Cacheable(value = "submers")
     public Map<String, String> getSubMer(String merNo) {
         Map<String, String> subMer = new HashMap<>();
         Merchant merchant = merchantDao.findById(merNo).orElse(new Merchant());
