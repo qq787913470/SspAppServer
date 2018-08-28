@@ -5,13 +5,13 @@ import java.io.Serializable;
 
 /**
  * Created by bjy on 2018/8/27.
- * APPToken
+ * Token
  */
 
 @Entity
 @Table(name = "T_B_APP_TOKEN")
 @IdClass(UserInfoPK.class)
-public class AppToken implements Serializable {
+public class Token implements Serializable {
     //商户号
     @Id
     @Column(nullable = false)
