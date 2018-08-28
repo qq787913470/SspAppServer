@@ -21,7 +21,7 @@ import java.util.List;
 public class UserDetailsService implements ClientDetailsService {
 
     @Value("${tokenValiditySeconds}")
-    private int accessTokenValiditySeconds = 30 * 24 * 60 * 60;
+    private int accessTokenValiditySeconds = 24 * 60 * 60;
 
     private final UserInfoDao userInfoDao;
 

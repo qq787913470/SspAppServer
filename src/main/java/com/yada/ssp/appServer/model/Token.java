@@ -2,43 +2,30 @@ package com.yada.ssp.appServer.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
-/**
- * Created by bjy on 2018/8/27.
- * Token
- */
+import java.util.Date;
 
 @Entity
 @Table(name = "T_B_APP_TOKEN")
 @IdClass(UserInfoPK.class)
 public class Token implements Serializable {
-    //商户号
+
+    // 商户号
     @Id
     @Column(nullable = false)
     private String merNo;
-    //登录名
+    // 登录名
     @Id
     @Column(nullable = false)
     private String loginName;
-    //token
+    // token
     @Column
     private String token;
-    //授权ID
+    // 授权信息
     @Column
-    private String authenticationId;
-    //用户名
+    private String roles;
+    // 到期时间
     @Column
-    private String userName;
-    //客户端ID
-    @Column
-    private String clientId;
-    //授权信息
-    @Column
-    private String authentication;
-    //更新Token
-    @Column
-    private String refreshToken;
-
+    private Date expiration;
 
     public String getMerNo() {
         return merNo;
@@ -64,43 +51,19 @@ public class Token implements Serializable {
         this.token = token;
     }
 
-    public String getAuthenticationId() {
-        return authenticationId;
+    public String getRoles() {
+        return roles;
     }
 
-    public void setAuthenticationId(String authenticationId) {
-        this.authenticationId = authenticationId;
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
-    public String getUserName() {
-        return userName;
+    public Date getExpiration() {
+        return expiration;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    public String getAuthentication() {
-        return authentication;
-    }
-
-    public void setAuthentication(String authentication) {
-        this.authentication = authentication;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public void setExpiration(Date expiration) {
+        this.expiration = expiration;
     }
 }
