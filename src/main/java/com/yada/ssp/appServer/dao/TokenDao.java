@@ -10,4 +10,8 @@ import org.springframework.data.repository.CrudRepository;
  * TokenDao
  */
 public interface TokenDao extends JpaRepository<Token, UserInfoPK>, CrudRepository<Token, UserInfoPK> {
+
+    Token findByToken(String token);
+
+    void deleteByToken(String token);
 }

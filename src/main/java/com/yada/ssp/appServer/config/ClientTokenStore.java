@@ -1,6 +1,7 @@
 package com.yada.ssp.appServer.config;
 
 import com.yada.ssp.appServer.model.Token;
+import com.yada.ssp.appServer.service.TokenService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -12,15 +13,17 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 只支持OAuth2.0的client_credentials模式
  */
 public class ClientTokenStore implements TokenStore {
 
-    private Map<String, Token> tokenStore = new HashMap<>();
+    private TokenService tokenService;
+
+    public ClientTokenStore(TokenService tokenService) {
+        this.tokenService = tokenService;
+    }
 
     @Override
     public OAuth2Authentication readAuthentication(OAuth2AccessToken token) {
@@ -30,8 +33,8 @@ public class ClientTokenStore implements TokenStore {
     @Override
     public OAuth2Authentication readAuthentication(String tokenValue) {
         OAuth2Authentication auth = null;
-        Token tokenInfo = tokenStore.get(tokenValue);
-        if(tokenInfo != null) {
+        Token tokenInfo = tokenService.findByToken(tokenValue);
+        if (tokenInfo != null) {
             OAuth2Request oAuth2Request = new OAuth2Request(
                     Collections.singletonMap("grant_type", "client_credentials"),
                     tokenInfo.getMerNo() + "@" + tokenInfo.getLoginName(),
@@ -46,8 +49,8 @@ public class ClientTokenStore implements TokenStore {
     @Override
     public OAuth2AccessToken readAccessToken(String tokenValue) {
         DefaultOAuth2AccessToken token = null;
-        Token tokenInfo = tokenStore.get(tokenValue);
-        if(tokenInfo != null) {
+        Token tokenInfo = tokenService.findByToken(tokenValue);
+        if (tokenInfo != null) {
             token = new DefaultOAuth2AccessToken(tokenValue);
             token.setExpiration(tokenInfo.getExpiration());
         }
@@ -62,18 +65,17 @@ public class ClientTokenStore implements TokenStore {
         tokenInfo.setLoginName(client[1]);
         tokenInfo.setToken(token.getValue());
         StringBuilder roles = new StringBuilder();
-        for(GrantedAuthority ga: authentication.getAuthorities()) {
+        for (GrantedAuthority ga : authentication.getAuthorities()) {
             roles.append(",").append(ga.getAuthority());
         }
         tokenInfo.setRoles(roles.toString().replaceFirst(",", ""));
         tokenInfo.setExpiration(token.getExpiration());
-        // TODO 数据库存储
-        tokenStore.put(token.getValue(), tokenInfo);
+        tokenService.saveAndUpdate(tokenInfo);
     }
 
     @Override
     public void removeAccessToken(OAuth2AccessToken token) {
-        tokenStore.remove(token.getValue());
+        tokenService.deleteByToken(token.getValue());
     }
 
     @Override
