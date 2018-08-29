@@ -74,4 +74,6 @@ public class UserController {
         deviceService.delete(new UserInfoPK(merNo, loginName));
         return true;
     }
+
+    // TODO APP如何获取终端
 }

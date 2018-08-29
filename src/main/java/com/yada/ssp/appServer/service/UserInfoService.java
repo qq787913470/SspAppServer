@@ -4,9 +4,9 @@ import com.yada.ssp.appServer.dao.UserInfoDao;
 import com.yada.ssp.appServer.model.UserInfo;
 import com.yada.ssp.appServer.model.UserInfoPK;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class UserInfoService {
@@ -38,7 +38,7 @@ public class UserInfoService {
      * @param newPwd 新密码
      * @return 更新是否成功
      */
-    public boolean updatePwd(UserInfoPK id, @RequestBody String oldPwd, String newPwd) {
+    public boolean updatePwd(UserInfoPK id, String oldPwd, String newPwd) {
 
         UserInfo userInfo = userInfoDao.findById(id).orElse(new UserInfo());
 
@@ -51,4 +51,15 @@ public class UserInfoService {
         }
     }
 
+    /**
+     * 查询APP用户绑定的终端号
+     *
+     * @param id 由merNo/loginName组成
+     * @return 终端号
+     */
+    @Cacheable(value = "termNos", unless = "#result == null")
+    public String getTermNo(UserInfoPK id) {
+        // TODO 获取终端号
+        return userInfoDao.findById(id).orElse(new UserInfo()).getMerNo();
+    }
 }

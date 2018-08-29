@@ -25,6 +25,12 @@ public class UserInfo {
     //角色ID
     @Column
     private String roles;
+    //用户绑定的终端号
+    @Column
+    private String termNo;
+    //用户绑定的交易币种
+    @Column
+    private String cry;
 
     public String getMerNo() {
         return merNo;
@@ -64,5 +70,21 @@ public class UserInfo {
 
     public void setRoles(String roles) {
         this.roles = roles;
+    }
+
+    public String getTermNo() {
+        return termNo;
+    }
+
+    public void setTermNo(String termNo) {
+        this.termNo = termNo;
+    }
+
+    public String getCry() {
+        return cry;
+    }
+
+    public void setCry(String cry) {
+        this.cry = cry;
     }
 }
