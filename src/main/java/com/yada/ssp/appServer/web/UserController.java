@@ -49,19 +49,6 @@ public class UserController {
     }
 
     /**
-     * 获取用户二维码
-     *
-     * @param token 授权信息
-     * @return 二维码的内容
-     */
-    @GetMapping(value = "/qrCode")
-    public String getQrCode(OAuth2Authentication token) {
-        String[] id = token.getOAuth2Request().getClientId().split("@");
-        // TODO 生成二维码
-        return id[0];
-    }
-
-    /**
      * 推送绑定
      *
      * @param token    授权信息
