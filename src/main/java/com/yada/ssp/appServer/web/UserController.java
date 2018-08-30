@@ -66,12 +66,12 @@ public class UserController {
     /**
      * 推送解绑
      *
-     * @param merNo 商户号
-     * @param loginName 登录名
+     * @param token 授权信息
      */
-    @DeleteMapping(value = "/unBindPush/{merNo}/{loginName}")
-    public boolean unBindPush(@PathVariable("merNo") String merNo, @PathVariable("loginName") String loginName) {
-        deviceService.delete(new UserInfoPK(merNo, loginName));
+    @DeleteMapping(value = "/unBindPush")
+    public boolean unBindPush(OAuth2Authentication token) {
+        String[] id = token.getOAuth2Request().getClientId().split("@");
+        deviceService.delete(new UserInfoPK(id[0], id[1]));
         return true;
     }
 

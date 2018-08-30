@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -38,7 +39,15 @@ public class QrCodeService {
     private Map<String, String> getQrCode(String tranType, String tranAmt, String termLsNo,
                                           String tranCry, String termNo, String merNo, String channel) {
         // TODO 发起生成二维码请求
-        return null;
+        Map<String, String> resp = new HashMap<>();
+        resp.put("respCode", "00");
+        resp.put("respMsg", "成功");
+        resp.put("qrCode", "https://www.yadadev.com");
+        resp.put("queryNo", "1234567890");
+        resp.put("tranAmt", tranAmt);
+        resp.put("tranCry", tranCry);
+        resp.put("timeout", "60");
+        return resp;
     }
 
     public Map<String, String> queryResult(String queryNo, UserInfoPK id) {
