@@ -33,7 +33,9 @@ public class DeviceService {
     }
 
     public void delete(UserInfoPK userInfoPK) {
-        deviceDao.deleteById(userInfoPK);
+        if(deviceDao.existsById(userInfoPK)){
+            deviceDao.deleteById(userInfoPK);
+        }
     }
 
     public List<Device> findListByMerNo(String merNo) {
