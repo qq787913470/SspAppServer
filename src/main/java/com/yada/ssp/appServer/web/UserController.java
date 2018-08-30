@@ -10,6 +10,9 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotEmpty;
+
+@Validated
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
@@ -57,7 +60,7 @@ public class UserController {
      * @param platform 设备平台
      */
     @PostMapping(value = "/bindPush")
-    public boolean bindPush(OAuth2Authentication token, String pushType, String deviceNo, String platform) {
+    public boolean bindPush(OAuth2Authentication token, @NotEmpty String pushType, @NotEmpty String deviceNo, @NotEmpty String platform) {
         String merNo = token.getOAuth2Request().getClientId().split("@")[0];
         String loginName = token.getOAuth2Request().getClientId().split("@")[1];
         return deviceService.saveAndUpdate(merNo, loginName, pushType, deviceNo, platform) != null;
