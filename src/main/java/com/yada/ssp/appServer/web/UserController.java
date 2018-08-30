@@ -4,7 +4,6 @@ import com.yada.ssp.appServer.model.UserInfo;
 import com.yada.ssp.appServer.model.UserInfoPK;
 import com.yada.ssp.appServer.service.DeviceService;
 import com.yada.ssp.appServer.service.UserInfoService;
-import com.yada.ssp.appServer.view.UpdatePwd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.validation.annotation.Validated;
@@ -12,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotEmpty;
 
-@Validated
 @RestController
 @RequestMapping(value = "/user")
+@Validated
 public class UserController {
 
     private final UserInfoService userInfoService;
@@ -41,14 +40,15 @@ public class UserController {
     /**
      * 修改商户密码
      *
-     * @param token 授权信息
-     * @param pwd   旧密码、新密码
+     * @param token  授权信息
+     * @param oldPwd 旧密码
+     * @param newPwd 新密码
      * @return 修改是否成功
      */
     @PutMapping(value = "/updatePwd")
-    public boolean updatePwd(OAuth2Authentication token, @RequestBody @Validated UpdatePwd pwd) {
+    public boolean updatePwd(OAuth2Authentication token, @NotEmpty String oldPwd, @NotEmpty String newPwd) {
         String[] id = token.getOAuth2Request().getClientId().split("@");
-        return userInfoService.updatePwd(new UserInfoPK(id[0], id[1]), pwd.getOldPwd(), pwd.getNewPwd());
+        return userInfoService.updatePwd(new UserInfoPK(id[0], id[1]), oldPwd, newPwd);
     }
 
     /**
