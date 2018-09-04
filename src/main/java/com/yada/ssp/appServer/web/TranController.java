@@ -34,7 +34,6 @@ public class TranController {
 
     @GetMapping(value = "/{merNo}")
     public List<TranInfo> list(OAuth2Authentication token, @PathVariable("merNo") String merNo, @RequestParam String tranDate) {
-        // TODO 如何查询集团商户数据
         String pMerNo = token.getOAuth2Request().getClientId().split("@")[0];
         if (merchantService.checkSubMer(pMerNo, merNo)) {
             return tranInfoService.getList(merNo, tranDate);

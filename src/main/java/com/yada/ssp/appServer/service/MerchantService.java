@@ -26,7 +26,6 @@ public class MerchantService {
      * @param merNo 集团商户号
      * @return 下级商户
      */
-    @Cacheable(value = "submers")
     public Map<String, String> getSubMer(String merNo) {
         Map<String, String> subMer = new HashMap<>();
         Merchant merchant = merchantDao.findById(merNo).orElse(new Merchant());

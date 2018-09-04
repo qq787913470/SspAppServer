@@ -77,6 +77,4 @@ public class UserController {
         deviceService.delete(new UserInfoPK(id[0], id[1]));
         return true;
     }
-
-    // TODO APP如何获取终端
 }

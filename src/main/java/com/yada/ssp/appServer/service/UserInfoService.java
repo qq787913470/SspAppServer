@@ -4,7 +4,6 @@ import com.yada.ssp.appServer.dao.UserInfoDao;
 import com.yada.ssp.appServer.model.UserInfo;
 import com.yada.ssp.appServer.model.UserInfoPK;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -57,9 +56,7 @@ public class UserInfoService {
      * @param id 由merNo/loginName组成
      * @return 终端号
      */
-    @Cacheable(value = "termNos", unless = "#result == null")
     public String getTermNo(UserInfoPK id) {
-        // TODO 获取终端号
-        return userInfoDao.findById(id).orElse(new UserInfo()).getMerNo();
+        return userInfoDao.findById(id).orElse(new UserInfo()).getTermNo();
     }
 }
