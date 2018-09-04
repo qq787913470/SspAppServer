@@ -23,9 +23,10 @@ public class TranInfoService {
         return tranInfoDao.findById(id).orElse(null);
     }
 
-    @Cacheable(value = "trans", unless = "#result == null",
+    @Cacheable(value = "trans", unless = "#result.size() == 0",
             condition = "#tranDate ne T(com.yada.ssp.appServer.util.DateUtil).getCurDate()")
     public List<TranInfo> getList(String merNo, String tranDate) {
+        // TODO 数据库tranDate的日期格式
         return tranInfoDao.findByMerNoAndTranDate(merNo, tranDate);
     }
 }
