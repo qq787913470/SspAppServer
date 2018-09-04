@@ -8,16 +8,17 @@ import java.util.Set;
 public class Merchant {
 
     @Id
+    @Column(name = "MERCHANT_ID", nullable = false)
     private String merNo;
 
-    @Column
+    @Column(name = "MER_NAME_CHN")
     private String merName;
 
-    @Column
+    @Column(name = "MERCHANT_TYPE")
     private String merType;
 
     @ManyToOne
-    @JoinColumn(name = "P_MER_NO")
+    @JoinColumn(name = "P_MER_ID")
     private Merchant merchant;
 
     @OneToMany(mappedBy = "merchant")
