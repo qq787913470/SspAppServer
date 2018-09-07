@@ -32,7 +32,7 @@ public class MerchantService {
         if (merchant.getMerNo() != null) {
             subMer.put(merchant.getMerNo(), merchant.getMerName());
         }
-        if ("1".equals(merchant.getMerType()) && merchant.getChildren() != null) {
+        if ("1".equals(merchant.getMerLev()) && merchant.getChildren() != null) {
             for (Merchant mer : merchant.getChildren()) {
                 subMer.put(mer.getMerNo(), mer.getMerName());
             }
@@ -54,7 +54,7 @@ public class MerchantService {
         }
 
         Merchant subMer = merchantDao.findById(subMerNo).orElse(new Merchant());
-        return subMer.getMerType() != null && "2".equals(subMer.getMerType())
+        return subMer.getMerLev() != null && "1".equals(subMer.getMerLev())
                 && subMer.getMerchant() != null && merNo.equals(subMer.getMerchant().getMerNo());
     }
 }

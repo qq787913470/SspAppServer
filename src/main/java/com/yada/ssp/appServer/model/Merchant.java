@@ -17,6 +17,9 @@ public class Merchant {
     @Column(name = "MERCHANT_TYPE")
     private String merType;
 
+    @Column(name = "MER_LEV")
+    private String merLev;
+
     @ManyToOne
     @JoinColumn(name = "P_MER_ID")
     private Merchant merchant;
@@ -24,6 +27,14 @@ public class Merchant {
     @OneToMany(mappedBy = "merchant")
     @OrderBy("merNo ASC")
     private Set<Merchant> children;
+
+    public String getMerLev() {
+        return merLev;
+    }
+
+    public void setMerLev(String merLev) {
+        this.merLev = merLev;
+    }
 
     public String getMerNo() {
         return merNo;
