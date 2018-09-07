@@ -58,12 +58,15 @@ public class UserController {
      * @param pushType 设备类型
      * @param deviceNo 设备ID
      * @param platform 设备平台
+     * @return 用户信息
      */
     @PostMapping(value = "/bindPush")
-    public boolean bindPush(OAuth2Authentication token, @NotEmpty String pushType, @NotEmpty String deviceNo, @NotEmpty String platform) {
-        String merNo = token.getOAuth2Request().getClientId().split("@")[0];
-        String loginName = token.getOAuth2Request().getClientId().split("@")[1];
-        return deviceService.saveAndUpdate(merNo, loginName, pushType, deviceNo, platform) != null;
+    public UserInfo bindPush(OAuth2Authentication token, @NotEmpty String pushType, @NotEmpty String deviceNo, @NotEmpty String platform) {
+        String[] id = token.getOAuth2Request().getClientId().split("@");
+        if (deviceService.saveAndUpdate(id[0], id[1], pushType, deviceNo, platform) != null) {
+            return userInfoService.getUserInfo(new UserInfoPK(id[0], id[1]));
+        }
+        return null;
     }
 
     /**
