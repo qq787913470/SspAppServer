@@ -55,21 +55,21 @@ public class MerchantServiceTest {
             Merchant subMer = new Merchant();
             switch (subMerNo) {
                 case "2":
-                    subMer.setMerType("2");
+                    subMer.setMerLev("1");
                     mer.setMerNo("1");
                     subMer.setMerchant(mer);
                     break;
                 case "3":
-                    subMer.setMerType("2");
+                    subMer.setMerLev("0");
                     mer.setMerNo("error");
                     subMer.setMerchant(mer);
                     break;
                 case "4":
-                    subMer.setMerType("2");
+                    subMer.setMerLev("0");
                     subMer.setMerchant(null);
                     break;
                 case "5":
-                    subMer.setMerType("0");
+                    subMer.setMerLev("0");
                     mer.setMerNo("1");
                     subMer.setMerchant(mer);
                     break;
