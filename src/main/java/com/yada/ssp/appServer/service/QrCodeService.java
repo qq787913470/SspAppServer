@@ -23,7 +23,7 @@ public class QrCodeService {
         UserInfo userInfo = userInfoService.getUserInfo(id);
         String termLsNo = String.valueOf(new Date().getTime());
         // 交易类型 动态二维码请求-01、交易渠道 目前默认填01
-        return getQrCode("01", amt, termLsNo, userInfo.getCry(), userInfo.getTermNo(), userInfo.getMerNo(), "01");
+        return getQrCode("01", amt, termLsNo, userInfo.getCcyType().getCcyType(), userInfo.getTermNo(), userInfo.getMerNo(), "01");
     }
 
     /**

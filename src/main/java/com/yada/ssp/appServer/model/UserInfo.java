@@ -28,9 +28,11 @@ public class UserInfo {
     //用户绑定的终端号
     @Column
     private String termNo;
+
     //用户绑定的交易币种
-    @Column
-    private String cry;
+    @OneToOne(targetEntity = CcyType.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ccyType", referencedColumnName = "ccyType")
+    private CcyType ccyType;
 
     public String getMerNo() {
         return merNo;
@@ -80,11 +82,11 @@ public class UserInfo {
         this.termNo = termNo;
     }
 
-    public String getCry() {
-        return cry;
+    public CcyType getCcyType() {
+        return ccyType;
     }
 
-    public void setCry(String cry) {
-        this.cry = cry;
+    public void setCcyType(CcyType ccyType) {
+        this.ccyType = ccyType;
     }
 }

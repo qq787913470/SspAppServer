@@ -3,7 +3,7 @@ package com.yada.ssp.appServer.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "T_B_TRANS")
+@Table(name = "T_V_TRANS")
 public class TranInfo {
 
     @Id
