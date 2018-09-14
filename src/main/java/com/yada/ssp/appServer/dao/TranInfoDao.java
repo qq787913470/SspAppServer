@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface TranInfoDao extends JpaRepository<TranInfo, Long>, CrudRepository<TranInfo, Long> {
+public interface TranInfoDao extends JpaRepository<TranInfo, String>, CrudRepository<TranInfo, String> {
 
     List<TranInfo> findByMerNoAndTranDateLike(String merNo, String tranDate);
 }

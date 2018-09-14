@@ -42,7 +42,7 @@ public class TranController {
     }
 
     @GetMapping(value = "/{merNo}/{id}")
-    public TranInfo info(OAuth2Authentication token, @PathVariable("merNo") String merNo, @PathVariable("id") Long id) {
+    public TranInfo info(OAuth2Authentication token, @PathVariable("merNo") String merNo, @PathVariable("id") String id) {
         String pMerNo = token.getOAuth2Request().getClientId().split("@")[0];
         if (merchantService.checkSubMer(pMerNo, merNo)) {
             return tranInfoService.getInfo(id);

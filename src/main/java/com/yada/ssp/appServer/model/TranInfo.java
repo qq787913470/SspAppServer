@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class TranInfo {
 
     @Id
-    private Long traceNo; // 流水号
+    @Column(name = "LS_ID")
+    private String traceNo; // 流水号
     @Column
     private Long batchNo; // 批次号
     @Column
@@ -35,11 +36,11 @@ public class TranInfo {
     @Column
     private String respCode; // 返回码
 
-    public Long getTraceNo() {
+    public String getTraceNo() {
         return traceNo;
     }
 
-    public void setTraceNo(Long traceNo) {
+    public void setTraceNo(String traceNo) {
         this.traceNo = traceNo;
     }
 

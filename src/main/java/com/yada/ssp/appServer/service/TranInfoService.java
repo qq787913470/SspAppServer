@@ -19,7 +19,7 @@ public class TranInfoService {
     }
 
     @Cacheable(value = "tranInfo", unless = "#result == null")
-    public TranInfo getInfo(Long id) {
+    public TranInfo getInfo(String id) {
         return tranInfoDao.findById(id).orElse(null);
     }
 
